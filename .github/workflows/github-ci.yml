@@ -22,11 +22,26 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo Hello, world!
 
+      - run: npm install -g serverless
+      - run: npm install
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }} # Your AWS region, e.g., us-east-1
+
+      - run: serverless deploy
+      
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |

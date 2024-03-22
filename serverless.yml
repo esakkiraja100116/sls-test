@@ -6,7 +6,6 @@ frameworkVersion: '3'
 provider:
   name: aws
   runtime: python3.9
-  profile: sr-portal
   environment:
     MONGO_URI: ${env:MONGO_URI}
 
@@ -36,10 +35,10 @@ functions:
 plugins:
   - serverless-scriptable-plugin
 
-custom:
-  scriptable:
-    # add custom hooks
-    hooks:
-      before:deploy:deploy: npm test
+# custom:
+#   scriptable:
+#     # add custom hooks
+#     hooks:
+#       before:deploy:deploy: npm test
 
 

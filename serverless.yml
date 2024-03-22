@@ -1,0 +1,45 @@
+useDotenv: true
+
+service: sls-test
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: python3.9
+  profile: sr-portal
+  environment:
+    MONGO_URI: ${env:MONGO_URI}
+
+package:
+  individually: true
+  exclude:
+    - 'payloads/**'
+    - 'node_modules/**'
+    - '__pycache__/**'
+
+functions:
+
+  hello:
+    handler: handler.hello
+    events:
+      - httpApi:
+          path: /
+          method: get
+
+  handleNodeRequest:
+    handler: src.main.lambda_handler
+    events:
+      - httpApi:
+          path: /nodes/{id}
+          method: any
+
+plugins:
+  - serverless-scriptable-plugin
+
+custom:
+  scriptable:
+    # add custom hooks
+    hooks:
+      before:deploy:deploy: npm test
+
+

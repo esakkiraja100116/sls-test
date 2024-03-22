@@ -22,3 +22,4 @@ var/
 node_modules/
 __pycahce__/
 .env
+__pycahce__/

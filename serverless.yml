@@ -35,10 +35,10 @@ functions:
 plugins:
   - serverless-scriptable-plugin
 
-# custom:
-#   scriptable:
-#     # add custom hooks
-#     hooks:
-#       before:deploy:deploy: npm test
+custom:
+  scriptable:
+    # add custom hooks
+    hooks:
+      before:deploy:deploy: npm test
 
 

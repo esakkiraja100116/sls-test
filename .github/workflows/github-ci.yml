@@ -49,6 +49,7 @@ jobs:
         with:
           python-version: '3.10.12' # Specify your Python version here
       - run: pip install pytest
+      - run: pip install pymongo
 
       - run: serverless deploy
 
